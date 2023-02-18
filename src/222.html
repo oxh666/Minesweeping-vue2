@@ -1,0 +1,77 @@
+<script src="//at.alicdn.com/t/font_2151348_5vbppxmvqro.js"></script>
+<div id="app">
+
+  <div class="main-area" @contextmenu.prevent>
+    <div class="component-area">
+
+      <div style="text-align:center" class="top-box">
+        <div class="top-box-item remain-mines show-number">
+          <div class="num-box">
+            {{ remainMines }}
+          </div>
+        </div>
+        <button @click="onRestartBtnClick" class="restart-btn top-box-item">
+          <svg class="icon" aria-hidden="true">
+            <use :xlink:href="'#icon-emoji-' + emojiType"></use>
+          </svg>
+        </button>
+        <!--         </div> -->
+        <div class="top-box-item time show-number">
+          <div class='num-box'> {{ time | timeFilter }}</div>
+        </div>
+      </div>
+
+      <div :class="['game-area', {unclickable: isGameOver}]">
+        <div v-for="rowArr in cellMatrix"
+             class="row-cells">
+          <div v-for="cell in rowArr"
+               class="cell"
+               @mousedown="mousedown($event, cell)"
+               @mouseup="mouseup($event, cell)"
+               @click="clickCell(cell)"
+               @contextmenu.prevent
+               @mouseleave="mouseleave(cell)">
+            <div
+              :class="['num-color-'+cell.val,
+               'num-color', 'unselected',
+               {'current-boom': cell.isClickedBoom}]">
+              <svg v-if="cell.val === -1"
+                   class="icon-cell"
+                   aria-hidden="true">
+                <use xlink:href="#icon-boom"></use>
+              </svg>
+              {{ cell.cell }}
+            </div>
+            <div
+              v-if="!cell.isVisited"
+              :class="['mask',
+                 { flagged: cell.isFlagged,
+                  'mouse-hold': cell.isReady}]">
+              <svg
+                v-if="(cell.isFlagged && !isGameOver) ||
+                 (isGameOver && cell.isFlagged && cell.val === -1)"
+                class="icon-cell" aria-hidden="true">
+                <use xlink:href="#icon-flag"></use>
+              </svg>
+              <svg
+                v-if="isGameOver
+                && cell.isFlagged
+                && cell.val !== -1"
+                class="icon-cell" aria-hidden="true">
+                <use xlink:href="#icon-wrong"></use>
+              </svg>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p>选择难度： <select v-model="difficulty" @change="changeDifficulty">
+    <option value="easy">初级</option>
+    <option value="normal">中级</option>
+    <option value="hard">高级</option>
+  </select></p>
+
+</div>

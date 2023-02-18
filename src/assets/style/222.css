@@ -1,0 +1,247 @@
+body {
+    background: #eee;
+}
+
+#app {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.main-area {
+    --cell-size: 16px;
+    /*   border: 1px solid; */
+    display: inline-block;
+    background-color: #c0c0c0;
+    padding: 3px;
+    /*   box-shadow: 3px 3px #f0f0f0 inset, -3px -3px #a0a0a0 inset; */
+    box-shadow: 4px 4px 10px #777, -4px -4px 10px white;
+
+}
+
+.game-area {
+    /*   margin: 5px; */
+    padding: 3px;
+    background-color: #c0c0c0;
+    box-shadow: 3px 3px #a0a0a0 inset, -3px -3px white inset;
+    margin-bottom: 6px;
+}
+
+.cell {
+    position: relative;
+    display: inline-block;
+    width: var(--cell-size);
+    height: var(--cell-size);
+    /*   line-height: var(--cell-size); */
+    text-align: center;
+    /*   vertical-align: middle; */
+    cursor: default;
+    /*     background-color: #c0c0c0; */
+    /*   box-shadow: -1px -1px #808080 inset, 2px 2px white inset,
+      -2px -2px #808080 inset; */
+}
+
+.row-cells {
+    /*   font-size: 1px; */
+    transform: translatey(-1px);
+    height: var(--cell-size);
+    /*   height: 18px; */
+}
+
+.num-color {
+    position: absolute;
+    font-weight: bold;
+    /*     font-size: 10px; */
+    /*   font-family: microsoft yahei; */
+    line-height: var(--cell-size);
+    width: inherit;
+    height: inherit;
+    background: #c0c0c0;
+    box-shadow: 1px 1px #808080 inset;
+}
+
+.num-color-0 {
+    color: darkgrey;
+}
+
+.num-color-1 {
+    color: blue;
+}
+
+.num-color-2 {
+    color: green;
+}
+
+.num-color-3 {
+    color: red;
+}
+
+.num-color-4 {
+    color: #000080;
+}
+
+.num-color-5 {
+    color: darkred;
+}
+
+.num-color-6 {
+    color: darkcyan;
+}
+
+.num-color-7 {
+    color: black;
+}
+
+.num-color-8 {
+    color: gray;
+}
+
+.num-color--1 {
+    /*   background: red; */
+}
+
+.num-color--2 {
+    background: greenyellow;
+}
+
+.current-boom {
+    background-color: red;
+}
+
+.unvisited {
+    display: none;
+}
+
+.component-area {
+    margin: auto 5px;
+}
+
+.top-box {
+    /*   width: 100%; */
+    box-shadow: 2px 2px #a0a0a0 inset, -2px -2px #ffffff inset;
+    padding: 6px;
+    margin-bottom: 6px;
+    margin-top: 6px;
+    text-align: center;
+}
+
+.top-box-item {
+    display: inline-block;
+    /*   vertical-align: middle; */
+}
+
+.time {
+    float: right;
+}
+
+.btn-box {
+    /*   width: 25px; */
+    /*   height: 25px; */
+    /*   position: relative; */
+}
+
+.restart-btn {
+    /*   position: absolute; */
+    /*   left: 0; */
+    width: 25px;
+    height: 25px;
+    border: 0px;
+    background: #c0c0c0;
+    /*   background: transparent; */
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+    border-right: 1px solid #808080;
+    border-bottom: 1px solid #808080;
+    box-shadow: -1px -1px #808080 inset, 2px 2px white inset,
+    -2px -2px #808080 inset;
+    /*   text-align: center; */
+}
+
+.restart-btn:active {
+    box-shadow: 2px 2px #808080 inset;
+}
+
+.restart-btn:touch {
+    box-shadow: 2px 2px #808080 inset;
+}
+
+.restart-btn:focus {
+    outline: none;
+}
+
+.remain-mines {
+    float: left;
+}
+
+.show-number {
+    width: 41px;
+    height: 25px;
+    box-shadow: -1px -1px white inset, 1px 1px #808080 inset;
+    line-height: 25px;
+    padding: 1px;
+}
+
+.unselected {
+    user-select: none;
+}
+
+.mask {
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    background: #c0c0c0;
+    box-shadow: -1px -1px #808080 inset, 2px 2px white inset,
+    -2px -2px #808080 inset;
+    cursor: default;
+    z-index: 99;
+}
+
+.icon {
+    /*   position: absolute; */
+    width: 1.3em;
+    height: 1.3em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    /*   left: 3px; */
+    /*   top: 3px; */
+    overflow: hidden;
+    transform: translatex(-3px);
+}
+
+.icon-cell {
+    width: 1em;
+    height: 1em;
+    overflow: hidden;
+    background: orangered;
+
+}
+
+/* .mask:active {
+  box-shadow: 1px 1px #808080 inset;
+
+} */
+
+.mouse-hold {
+    box-shadow: 1px 1px #808080 inset;
+}
+
+.unclickable {
+    pointer-events: none;
+}
+
+.flagged {
+    pointer-events: none;
+    box-shadow: -1px -1px #808080 inset, 2px 2px white inset,
+    -2px -2px #808080 inset;
+}
+
+.num-box {
+
+    font-size: font-family: MTC;
+    color: red;
+    font-weight: bold;
+    text-align: right;
+    padding: 0 3px;
+    background: black;
+}

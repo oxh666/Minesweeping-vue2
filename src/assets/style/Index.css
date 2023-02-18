@@ -1,0 +1,134 @@
+.main-area {
+    --cell-size: 50px;
+    border: 1px solid;
+    display: inline-block;
+    background-color: #c0c0c0;
+}
+
+.top-box {
+    padding: 6px;
+    margin-bottom: 6px;
+    margin-top: 6px;
+    text-align: center;
+}
+
+.top-box-item {
+    display: inline-block;
+}
+
+.remain-mines {
+    float: left;
+}
+
+.time {
+    float: right;
+}
+
+.show-number {
+    width: 41px;
+    height: 25px;
+    box-shadow: -1px -1px white inset, 1px 1px #808080 inset;
+}
+
+
+.game-area {
+    margin: 10px;
+    padding: 3px;
+    background-color: #c0c0c0;
+}
+
+.row-cells {
+    font-size: 20px;
+    transform: translatey(-5px);
+    height: var(--cell-size);
+}
+
+.cell {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    border: 1px solid;
+    text-align: center;
+    vertical-align: middle;
+    cursor: default;
+    position: relative;
+
+
+}
+
+/*数字颜色*/
+.num-color {
+    font-weight: bold;
+}
+
+.num-color-0 {
+    color: darkgrey;
+}
+
+.num-color-1 {
+    color: blue;
+}
+
+.num-color-2 {
+    color: green;
+}
+
+.num-color-3 {
+    color: red;
+}
+
+.num-color-4 {
+    color: darkblue;
+}
+
+.num-color-5 {
+    color: darkred;
+}
+
+.num-color-6 {
+    color: darkcyan;
+}
+
+.num-color-7 {
+    color: black;
+}
+
+.num-color-8 {
+    color: gray;
+}
+
+.num-color--1 {
+    background: red;
+}
+
+.num-color--2 {
+    background: greenyellow;
+}
+
+
+/*蒙层和数字颜色*/
+.num-color {
+    position: absolute;
+    font-weight: bold;
+    line-height: var(--cell-size);
+    width: inherit;
+    height: inherit;
+    /* background: #c0c0c0;*/
+    /*box-shadow: 1px 1px #808080 inset;*/
+}
+
+.mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: inherit;
+    height: inherit;
+    z-index: 99;
+    background: #42b983;
+}
+
+.visited {
+    display: none;
+}
+
