@@ -2,12 +2,7 @@
     background: #eee;
 }
 
-#app {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-}
+
 
 .main-area {
     --cell-size: 16px;
@@ -160,7 +155,7 @@
     box-shadow: 2px 2px #808080 inset;
 }
 
-.restart-btn:touch {
+.restart-btn {
     box-shadow: 2px 2px #808080 inset;
 }
 

@@ -1,0 +1,127 @@
+body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,
+pre,form,fieldset,legend,button,input,textarea,th,td {
+  margin: 0;
+  padding: 0
+}
+
+body,button,input,select,textarea {
+  font: 12px/1.5 "\5FAE\8F6F\96C5\9ED1", arial;
+  *line-height: 1.5
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-size: 100%;
+  font-weight: normal;
+}
+
+address,cite,dfn,em,var {
+  font-style: normal;
+}
+
+code,kbd,pre,samp {
+  font-family: courier new, courier, monospace;
+}
+
+ul,ol {
+  list-style: none;
+}
+
+fieldset,img {
+  border: 0
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+input,button,textarea,select,optgroup,option {
+  font-family: inherit;
+  font-size: inherit;
+  font-style: inherit;
+  font-weight: inherit;
+  font-size: 100%;
+}
+
+/*div:after, ul:after, dl:after,.clearfix:after {display:block; clear:both; height:0; visibility:hidden;}*/
+/****/
+abbr,article,aside,audio,canvas,datalist,details,figure,footer,
+header,hgroup,menu,nav,output,progress,section,video {
+  display: block;
+  margin: 0;
+  padding: 0
+}
+
+i,u,b,em,span,small {
+  font-weight: normal;
+  font-style: normal;
+}
+
+html,body {
+  height: 100%
+}
+
+/****/
+html {
+  font-size: 62.5%;
+}
+
+body {
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+
+a {
+  text-decoration: none;
+}
+
+h2 {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  word-spacing: -4px;
+}
+
+input,
+div,
+div:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track {
+  background-color: inherit;
+  border: none;
+  /* margin: 6px; */
+  border-radius: 10px;
+  /* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  background-color: #F5F5F5; */
+}
+
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  position: relative;
+  right: 2px;
+  /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);*/
+  background-color: #c6c6cd;
+  width: 6px;
+}

@@ -10,7 +10,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -35,7 +34,7 @@ const posArr = [
  * @description 格子属性
  */
 class Cell {
-  constructor(row, col) {
+  constructor (row, col) {
     this.row = row
     this.col = col
     /**
@@ -59,81 +58,67 @@ export default {
   components: {
     // MineClearing
   },
-  data() {
+  data () {
     return {
       /**
        * @description 每一局游戏第一次点击格子
        */
       isFirstClick: true,
-
       /**
        * @description 数组
        */
       mines: [],
-
       /**
        * @description 格子数组
        */
       cellMatrix: null,
-
       /**
        * @description 每一局游戏第一次点击格子
        */
       isGameOver: false,
-
       /**
        * @description 行数
        */
       rowSize: 8,
-
       /**
        * @description 列数
        */
       colSize: 8,
-
       /**
        * @description 地雷数量
        */
       mineSize: 9,
-
       /**
        * @description 剩余地雷
        */
       remainMines: '',
-
       /**
        * @description 安全格子数量
        */
       noMineBlocks: '',
-
       /**
        * @description 计时累加
        */
       time: 0.0,
-
       /**
        * @description 计时
        */
       timer: '',
-
       /**
        * @description 按键
        */
       btnContent: 'Start',
-
       /**
        * @description 难度
        */
       difficulty: 'easy'
     }
   },
-  mounted() {
+  mounted () {
     // 初始化游戏
     console.log('-----------------------')
     console.log('初始化游戏中...')
-
     this.initGame()
-
     console.log('游戏初始化完成')
     console.log('-----------------------')
   },
@@ -144,90 +129,79 @@ export default {
      * @param c
      * @returns {*}
      */
-    getCell(r, c) {
+    getCell  (r, c) {
       /* 为了解放双手 */
       return this.cellMatrix[r][c]
     },
-
     /**
      * @description 第一次点击格子
      * @param cell 点击的X坐标
      */
-    clickCell(cell) {
+    clickCell (cell) {
       if (cell.isVisited || cell.isFlagged || this.isGameOver) {
         return
       }
-
       if (this.isFirstClick) {
         this.noMineBlocks = this.colSize * this.rowSize - this.mineSize
         this.initMines(cell.row, cell.col)
         this.timeStart()
       }
-
       cell.isVisited = true
-
       if (cell.val === -1) {
         // 踩雷了，爆炸
         cell.isClickedBoom = true
         this.fail()
         return
       }
-
       if (cell.val === 0) {
         // 踩空了
         this.search(cell)
       } else {
         cell.cell = cell.val
       }
-
       // 注意这个，判断胜利的位置放到了最后
       if (--this.noMineBlocks === 0) {
         this.success()
       }
     },
-
     /**
      * @description 踩空后进行搜索，查询周围格子数字
      * @param cell
      */
-    search(cell) {
+    search (cell) {
       /* 因为有了 neighbors，代码简化了许多 */
       cell.neighbors.forEach((neighbor) => {
         this.clickCell(neighbor)
       })
     },
-
     /**
      * @description 失败结局
      */
-    fail() {
-      this.gameover()
+    fail () {
+      this.gameOver()
       this.btnContent = 'BadEnding'
       this.showMines(false)
     },
-
     /**
      * @description 胜利结局
      */
-    success() {
-      this.gameover()
+    success () {
+      this.gameOver()
       this.btnContent = 'HappyEnding'
       this.showMines(true)
     },
-
     /**
      * @description 游戏结束
      */
-    gameover() {
+    gameOver () {
       this.timeStop()
       this.isGameOver = true
     },
-
     /**
      * @description 结束时显示地雷
      * @param isSuccess 是否成功
      */
-    showMines(isSuccess) {
+    showMines (isSuccess) {
       this.mines.forEach((cell) => {
         if (isSuccess) {
           // cell.isFlagged = true;
@@ -243,19 +217,17 @@ export default {
         }
       })
     },
-
     /**
      * @description 重新开始
      */
-    onRestartBtnClick() {
+    onRestartBtnClick () {
       this.btnContent = 'Start'
       this.restart()
     },
-
     /**
      * @description 重新开始
      */
-    restart() {
+    restart () {
       console.log('重新开始')
       this.timeStop()
       this.initGame()
@@ -263,7 +235,7 @@ export default {
     /**
      * @description 初始化游戏
      */
-    initGame() {
+    initGame () {
       this.isFirstClick = true
       this.isGameOver = false
       if (this.timer) {
@@ -273,7 +245,6 @@ export default {
       this.timer = ''
       this.time = 0.0
       this.remainMines = this.mineSize
-
       // 初始化二维数组
       this.cellMatrix = []
       for (let row = 0; row < this.rowSize; row++) {
@@ -299,16 +270,14 @@ export default {
         })
       })
     },
-
     /**
      * @description  传入第一次点击的坐标
      * @param row 第一次点击的X坐标
      * @param col 第一次点击的Y坐标
      */
-    initMines(row, col) {
+    initMines (row, col) {
       console.log('-----------------------')
       console.log('初始化地雷...')
-
       // 地雷设为 -1
       for (let i = 0; i < this.mineSize; i++) {
         do {
@@ -317,7 +286,6 @@ export default {
         } while (
           (mineRow === row && mineCol === col) ||
           this.getCell(mineRow, mineCol).val === -1)
-
         this.getCell(mineRow, mineCol).val = -1
         this.mines.push(this.getCell(mineRow, mineCol))
       }
@@ -326,7 +294,6 @@ export default {
       console.log('初始化地雷完成...')
       console.log('-----------------------')
       this.isFirstClick = false
-
       this.cellMatrix.forEach((rowArr) => {
         rowArr.forEach((cell) => {
           if (cell.val === -1) {
@@ -340,13 +307,11 @@ export default {
       })
       this.isFirstClick = false
     },
-
     /**
      * @description 初始化数字
      */
-    initNum() {
+    initNum () {
       console.log('初始化数字...')
-
       this.cellMatrix.forEach((rowArr) => {
         rowArr.forEach((cell) => {
           if (cell.val === -1) {
@@ -359,62 +324,58 @@ export default {
         })
       })
     },
-
     /**
      * @description 插旗
      */
-    setFlag(cell) {
-      cell.isFlagged = !cell.isFlagged;
+    setFlag (cell) {
+      cell.isFlagged = !cell.isFlagged
       if (cell.isFlagged) {
-        this.remainMines--;
+        this.remainMines--
       } else {
-        this.remainMines++;
+        this.remainMines++
       }
     },
     /**
      * @description 计时开始
      */
-    timeStart() {
+    timeStart () {
       this.timer = setInterval(() => {
         this.time += 0.1
       }, 100)
     },
-
     /**
      * @description 计时停止
      */
-    timeStop() {
+    timeStop () {
       clearInterval(this.timer)
     },
     /**
      * @description 选择难度
      */
-    changeDifficulty() {
+    changeDifficulty () {
       switch (this.difficulty) {
         case 'easy': {
-          this.rowSize = 8;
-          this.colSize = 8;
-          this.mineSize = 10;
-          break;
+          this.rowSize = 8
+          this.colSize = 8
+          this.mineSize = 10
+          break
         }
         case 'normal': {
-          this.rowSize = 16;
-          this.colSize = 16;
-          this.mineSize = 40;
-          break;
+          this.rowSize = 16
+          this.colSize = 16
+          this.mineSize = 40
+          break
         }
         case 'hard': {
-          this.rowSize = 16;
-          this.colSize = 30;
-          this.mineSize = 99;
-          break;
+          this.rowSize = 16
+          this.colSize = 30
+          this.mineSize = 99
+          break
         }
       }
-      this.initGame();
+      this.initGame()
     },
-
-
-    mousedown(e, cell) {
+    mousedown (e, cell) {
       if (e.button === 2) {
         if (!cell.isVisited) this.setFlag(cell)
         cell.isRightPress = true
@@ -430,21 +391,16 @@ export default {
         cell.isReady = true
         return
       }
-
       // console.log(e.button);
-      this.emojiType = "click"
+      this.emojiType = 'click'
     },
-
-    mouseup(e, cell) {
-      this.emojiType = "default"
-      let clear = false
-
+    mouseup (e, cell) {
+      this.emojiType = 'default'
       // 同时按下后，有一个松开
       if (cell.isLeftPress && cell.isRightPress) {
         if (cell.val > 0 && cell.isVisited) {
-          let unVisitedCells = []
+          const unVisitedCells = []
           let flags = 0
-
           cell.neighbors.forEach((neighbor) => {
             if (neighbor.isFlagged) {
               // console.log(neighbor)
@@ -454,8 +410,7 @@ export default {
               unVisitedCells.push(neighbor)
             }
           })
-
-          let mines = []
+          const mines = []
           if (flags === cell.val) {
             unVisitedCells.forEach((c) => {
               if (c.val === -1) {
@@ -477,40 +432,20 @@ export default {
       cell.neighbors.forEach((neighbor) => {
         neighbor.isReady = false
       })
-
       if (e.button === 2) {
         cell.isRightPress = false
       } else if (e.button === 0) {
         cell.isLeftPress = false
       }
     },
-
-
-    mouseleave(cell) {
+    mouseleave (cell) {
       if (cell.isReady) {
-        cell.isReady = false;
+        cell.isReady = false
       }
     }
   },
-
   /** ------------------------------------------------------------------------ */
   /** ------------------------------------------------------------------------ */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   filters: {
     /**
@@ -518,33 +453,23 @@ export default {
      * @param val
      * @returns {string}
      */
-    timeFilter(val) {
+    timeFilter (val) {
       return Number(val).toFixed(1)
-    }
-    ,
-
+    },
     /**
      * @description 设置空格
      * @param val 格子数字
      * @returns {string|*}
      */
-    cellFilter(val) {
+    cellFilter (val) {
       return val === 0 ? '' : val
     }
   }
-
 }
 </script>
 
 <style>
 @import "./assets/style/Index.css";
 
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
